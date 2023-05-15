@@ -66,7 +66,7 @@
 ```
 
 ## EndPoints
-### POST /convert/divide_and_complete_address - 郵便番号から住所を補完し、分割する
+### POST /convert/complete_and_divide_address - 郵便番号から住所を補完し、分割する
 
 簡単な仕様については上記の通り。
 詳しい仕様については、[**How to Complete and Divide Address**](#how-to-complete-and-divide-address) を参照すること。
