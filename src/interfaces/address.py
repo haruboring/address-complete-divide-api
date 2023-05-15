@@ -34,3 +34,10 @@ class Address(BaseModel):
 
     def divide_address(self) -> list[str]:
         return self.address.split(" ")
+
+    def delete_extra_attributes(self):
+        delattr(self, "zipcode")
+        delattr(self, "address")
+        delattr(self, "completed_prefecture")
+        delattr(self, "completed_city")
+        delattr(self, "completed_town")

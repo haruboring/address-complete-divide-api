@@ -9,5 +9,7 @@ router = APIRouter()
 async def health(request: list[Address]):  # type: ignore
     for address in request:
         address.complete_address()
+        address.divide_address()
+        address.delete_extra_attributes()
 
     return request
