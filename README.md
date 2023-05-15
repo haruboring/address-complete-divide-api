@@ -32,33 +32,33 @@
 
 ```json
 {
-  "completed_count": 2,
-  "addresses": [
-    {
-      "prefecture": "東京都",
-      "city": "港区",
-      "town": "芝公園",
-      "house_number": "4-2-8",
-      "building_name": "",
-      "room_number": ""
-    },
-    {
-      "prefecture": "東京都",
-      "city": "千代田区",
-      "town": "千代田",
-      "house_number": "1-1",
-      "building_name": "",
-      "room_number": ""
-    },
-    {
-      "prefecture": "東京都",
-      "city": "永田町",
-      "town": "",
-      "house_number": "1-7-1",
-      "building_name": "国会議事堂",
-      "room_number": "123号室"
-    }
-  ]
+	"completed_count": 2,
+	"addresses": [
+		{
+			"prefecture": "東京都",
+			"city": "港区",
+			"town": "芝公園",
+			"house_number": "4-2-8",
+			"building_name": "",
+			"room_number": ""
+		},
+		{
+			"prefecture": "東京都",
+			"city": "千代田区",
+			"town": "千代田",
+			"house_number": "1-1",
+			"building_name": "",
+			"room_number": ""
+		},
+		{
+			"prefecture": "東京都",
+			"city": "永田町",
+			"town": "",
+			"house_number": "1-7-1",
+			"building_name": "国会議事堂",
+			"room_number": "123号室"
+		}
+	]
 }
 ```
 
@@ -130,6 +130,5 @@ CSV 形式で
 
 - DB を作成する必要があるので実装が少し面倒
 - 郵便番号と住所の対応に変化があれば、迅速に DB を更新する必要がある
-
 
 # How to Divide Address
