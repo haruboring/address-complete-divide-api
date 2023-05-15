@@ -1,7 +1,7 @@
 # address-complete-divide
 ![pytest](https://github.com/haruboring/address-complete-divide/actions/workflows/pytest.yml/badge.svg)
 ![flake8 & black](https://github.com/haruboring/address-complete-divide/actions/workflows/linter.yml/badge.svg)
-
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/haruboring/9c19de175b7ce5bcfd2eb2ed26a60d40/raw/pytest-coverage-comment.json)](https://github.com/haruboring/address-complete-divide-api/actions/workflows/pytest.yml)
 
 ## About
 
