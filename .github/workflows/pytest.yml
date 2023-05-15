@@ -25,3 +25,15 @@ jobs:
         with:
             pytest-coverage-path: pytest-coverage.txt
             junitxml-path: ./pytest.xml
+
+      - name: Create Coverage Badge
+        uses: schneegans/dynamic-badges-action@v1.3.0
+        with:
+            auth: ${{ secrets.BADGE_GIST }}
+            gistID: 9c19de175b7ce5bcfd2eb2ed26a60d40
+
+            filename: pytest-coverage-comment.json
+            label: Coverage
+            message: ${{ steps.coverageComment.outputs.coverage }}
+            color: ${{ steps.coverageComment.outputs.color }}
+            namedLogo: python
