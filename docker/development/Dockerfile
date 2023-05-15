@@ -10,6 +10,7 @@ RUN pip install --no-cache-dir --upgrade -r app/requirements.txt
 # Copy the application code
 COPY ./src /src
 COPY ./tests /tests
+COPY ./data /data
 
 # Run the application
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0" , "--port", "8000" , "--reload"]
