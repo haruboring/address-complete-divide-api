@@ -32,7 +32,8 @@
 
 ```json
 {
-  [
+  "completed_count": 2,
+  "addresses": [
     {
       "prefecture": "東京都",
       "city": "港区",
@@ -51,8 +52,8 @@
     },
     {
       "prefecture": "東京都",
-      "city": "千代田区",
-      "town": "永田町",
+      "city": "永田町",
+      "town": "",
       "house_number": "1-7-1",
       "building_name": "国会議事堂",
       "room_number": "123号室"
