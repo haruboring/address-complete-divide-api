@@ -35,33 +35,33 @@
 
 ```json
 {
-	"completed_count": 2,
-	"addresses": [
-		{
-			"prefecture": "東京都",
-			"city": "港区",
-			"town": "芝公園",
-			"house_number": "4-2-8",
-			"building_name": "",
-			"room_number": ""
-		},
-		{
-			"prefecture": "東京都",
-			"city": "千代田区",
-			"town": "千代田",
-			"house_number": "1-1",
-			"building_name": "",
-			"room_number": ""
-		},
-		{
-			"prefecture": "東京都",
-			"city": "永田町",
-			"town": "",
-			"house_number": "1-7-1",
-			"building_name": "国会議事堂",
-			"room_number": "123号室"
-		}
-	]
+  "completed_count": 2,
+  "addresses": [
+    {
+      "prefecture": "東京都",
+      "city": "港区",
+      "town": "芝公園",
+      "house_number": "4-2-8",
+      "building_name": "",
+      "room_number": ""
+    },
+    {
+      "prefecture": "東京都",
+      "city": "千代田区",
+      "town": "千代田",
+      "house_number": "1-1",
+      "building_name": "",
+      "room_number": ""
+    },
+    {
+      "prefecture": "東京都",
+      "city": "永田町",
+      "town": "",
+      "house_number": "1-7-1",
+      "building_name": "国会議事堂",
+      "room_number": "123号室"
+    }
+  ]
 }
 ```
 
@@ -158,27 +158,18 @@ CSV 形式で
 後々追記予定
 
 ## How to Use
-1. Up the docker container
-   if change requirements.txt or Dockerfile or docker-compose.yml
-   ```bash
-    docker-compose build
-   ```
+Up the docker container
+if change requirements.txt or Dockerfile or docker-compose.yml
+```bash
+docker-compose build
+```
+  
+And
+```bash
+docker-compose up
+```
 
-	 and
-   ```bash
-    docker-compose up
-   ```
-
-	 And Access any endpoint, such as `http://0.0.0.0:8000/docs`
-
-3. Access the container
-
-   ```bash
-    docker container exec -it api bash
-   ```
-
-
-i.e., if you want access /docs, you can access it by `http://0.0.0.0:8000/docs`.
+And Access any endpoint, such as `http://0.0.0.0:8000/docs`
 
 dependencies の更新に関しては、[Python: Create requirements.txt From Poetry](#create-requirementstxt-from-poetry)を参照。
 
