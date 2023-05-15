@@ -35,7 +35,7 @@ class Address(BaseModel):
         url = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={self.zipcode}"
         response = requests.get(url)
 
-        if response.status_code == 200 and len(response.json()["results"]) == 1:
+        if response.status_code == 200 and response.json()["results"] is not None and len(response.json()["results"]) == 1:
             result = response.json()["results"][0]
             self.completed_prefecture = result.get("address1", "")
             self.completed_city = result.get("address2", "")
