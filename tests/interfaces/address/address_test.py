@@ -1,7 +1,6 @@
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from pydantic import BaseModel, Field
 from requests import Response
 
 from src.interfaces.address import Address
