@@ -91,6 +91,11 @@ class Address(BaseModel):
         address: str = self.rest_address
         completed_city: str = self.completed_city
 
+        # 郵便番号から求めた市区町村名と一致する場合
+        if completed_city != "" and re.match(completed_city, address) is not None:
+            self.is_completed = True
+            return completed_city, address.replace(completed_city, "", 1)
+
         # 区で市区町村を区切るのは、東京23区のみ
         for ward_name in WARD_NAMES_OF_TOKYO:
             if re.match(ward_name, address) is not None:
