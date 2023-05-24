@@ -118,7 +118,7 @@ class Address(BaseModel):
 
     def extract_town(self) -> tuple[str, str]:
         address: str = self.rest_address
-        completed_town: str = self.completed_city
+        completed_town: str = self.completed_town
 
         # 郵便番号から求めた町域名と一致する場合
         if completed_town != "" and re.match(completed_town, address) is not None:
