@@ -32,7 +32,7 @@ jobs:
             auth: ${{ secrets.BADGE_GIST }}
             gistID: 9c19de175b7ce5bcfd2eb2ed26a60d40
 
-            filename: pytest-coverage-comment.json
+            filename: raw/pytest-coverage-comment.json
             label: Coverage
             message: ${{ steps.coverageComment.outputs.coverage }}
             color: ${{ steps.coverageComment.outputs.color }}
