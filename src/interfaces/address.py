@@ -9,7 +9,7 @@ from data.ward_names_of_tokyo import WARD_NAMES_OF_TOKYO
 from src.functions.normalize import Normalize
 
 
-class Address(BaseModel):
+class AddressInfo(BaseModel):
     zipcode: str = Field(default="", example="100-0000")
     address: str = Field(default="", example="東京都港区芝公園1-1東京スカイツリー101")
 
