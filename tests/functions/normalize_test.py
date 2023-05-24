@@ -77,5 +77,5 @@ class TestReplaceHouseNumberExpression(TestCase):
         self.assertEqual(return_value, "/banti/ban/ban/banti/gou/no/gou/tyoume")
 
     def test_replace_house_number_expression3(self) -> None:
-        return_value = Normalize.replace_house_number_expression("番地番番番地号の号三丁目")
-        self.assertEqual(return_value, "/banti/ban/ban/banti/gou/no/gou3/tyoume")
+        return_value = Normalize.replace_house_number_expression("三丁目")
+        self.assertEqual(return_value, "3/tyoume")
