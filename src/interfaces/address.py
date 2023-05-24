@@ -146,17 +146,28 @@ class Address(BaseModel):
     def extract_house_number(self) -> tuple[str, str]:
         address: str = self.rest_address
         match = re.match("[0-9〇一二三四五六七八九/tyoume/banti/ban/gou/no-]+", address)
+        if match is None:
+            return "", address
+
+        house_number: str = match.group()
+        rest_address: str = address.replace(house_number, "", 1)
+        house_number = Normalize.convert_house_number_expression_to_hyphen(house_number)
+        house_number = Normalize.convert_Chinese_numeral_to_half_width_digit(house_number)
+
+        # 1-2-3-302のように、部屋番号が連結している可能性がある
+        match = re.match("(?:[0-9]+-*){0,3}", house_number)
         if match is not None:
+            rest_address = house_number.replace(match.group(), "", 1) + rest_address
             house_number: str = match.group()
-            house_number = Normalize.convert_house_number_expression_to_hyphen(house_number)
-            house_number = Normalize.convert_Chinese_numeral_to_half_width_digit(house_number)
 
-            # 1-2-3-のようになっている場合がある
-            if house_number[len(house_number) - 1] == "-":
-                house_number = house_number[:-1]
-            return house_number, address.replace(match.group(), "", 1)
+        # 1-2-3-のようになっている場合がある
+        if house_number != "" and house_number[len(house_number) - 1] == "-":
+            house_number = house_number[:-1]
 
-        return "", address
+        if rest_address != "" and rest_address[len(rest_address) - 1] == "-":
+            rest_address = rest_address[:-1]
+
+        return house_number, rest_address
 
     def extract_building_name(self) -> tuple[str, str]:
         address: str = self.rest_address
