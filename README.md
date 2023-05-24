@@ -40,33 +40,33 @@
 
 ```json
 {
-	"completed_count": 2,
-	"addresses": [
-		{
-			"prefecture": "東京都",
-			"city": "港区",
-			"town": "芝公園",
-			"house_number": "4-2-8",
-			"building_name": "",
-			"room_number": ""
-		},
-		{
-			"prefecture": "東京都",
-			"city": "千代田区",
-			"town": "千代田",
-			"house_number": "1-1",
-			"building_name": "",
-			"room_number": ""
-		},
-		{
-			"prefecture": "東京都",
-			"city": "永田町",
-			"town": "",
-			"house_number": "1-7-1",
-			"building_name": "国会議事堂",
-			"room_number": "123号室"
-		}
-	]
+  "completed_count": 2,
+  "addresses": [
+    {
+      "prefecture": "東京都",
+      "city": "港区",
+      "town": "芝公園",
+      "house_number": "4-2-8",
+      "building_name": "",
+      "room_number": ""
+    },
+    {
+      "prefecture": "東京都",
+      "city": "千代田区",
+      "town": "千代田",
+      "house_number": "1-1",
+      "building_name": "",
+      "room_number": ""
+    },
+    {
+      "prefecture": "東京都",
+      "city": "永田町",
+      "town": "",
+      "house_number": "1-7-1",
+      "building_name": "国会議事堂",
+      "room_number": "123号室"
+    }
+  ]
 }
 ```
 
@@ -132,30 +132,30 @@ https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060
 
 ```json
 {
-	"message": null,
-	"results": [
-		{
-			"address1": "北海道",
-			"address2": "美唄市",
-			"address3": "上美唄町協和",
-			"kana1": "ﾎｯｶｲﾄﾞｳ",
-			"kana2": "ﾋﾞﾊﾞｲｼ",
-			"kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳｷｮｳﾜ",
-			"prefcode": "1",
-			"zipcode": "0790177"
-		},
-		{
-			"address1": "北海道",
-			"address2": "美唄市",
-			"address3": "上美唄町南",
-			"kana1": "ﾎｯｶｲﾄﾞｳ",
-			"kana2": "ﾋﾞﾊﾞｲｼ",
-			"kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳﾐﾅﾐ",
-			"prefcode": "1",
-			"zipcode": "0790177"
-		}
-	],
-	"status": 200
+  "message": null,
+  "results": [
+    {
+      "address1": "北海道",
+      "address2": "美唄市",
+      "address3": "上美唄町協和",
+      "kana1": "ﾎｯｶｲﾄﾞｳ",
+      "kana2": "ﾋﾞﾊﾞｲｼ",
+      "kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳｷｮｳﾜ",
+      "prefcode": "1",
+      "zipcode": "0790177"
+    },
+    {
+      "address1": "北海道",
+      "address2": "美唄市",
+      "address3": "上美唄町南",
+      "kana1": "ﾎｯｶｲﾄﾞｳ",
+      "kana2": "ﾋﾞﾊﾞｲｼ",
+      "kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳﾐﾅﾐ",
+      "prefcode": "1",
+      "zipcode": "0790177"
+    }
+  ],
+  "status": 200
 }
 ```
 
