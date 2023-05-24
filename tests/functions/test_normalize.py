@@ -79,3 +79,11 @@ class TestReplaceHouseNumberExpression(TestCase):
     def test_replace_house_number_expression3(self) -> None:
         return_value = Normalize.replace_house_number_expression("三丁目")
         self.assertEqual(return_value, "3/tyoume")
+
+    def test_replace_house_number_expression4(self) -> None:
+        return_value = Normalize.replace_house_number_expression("三番地")
+        self.assertEqual(return_value, "三/banti")
+
+    def test_replace_house_number_expression5(self) -> None:
+        return_value = Normalize.replace_house_number_expression("三丁目三番地三号")
+        self.assertEqual(return_value, "3/tyoume三/banti三/gou")
