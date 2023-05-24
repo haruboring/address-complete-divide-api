@@ -1,4 +1,5 @@
 # address-complete-divide
+
 ![pytest](https://github.com/haruboring/address-complete-divide/actions/workflows/pytest.yml/badge.svg)
 ![flake8 & black](https://github.com/haruboring/address-complete-divide/actions/workflows/linter.yml/badge.svg)
 [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/haruboring/9c19de175b7ce5bcfd2eb2ed26a60d40/raw/pytest-coverage-comment.json)](https://github.com/haruboring/address-complete-divide-api/actions/workflows/pytest.yml)
@@ -9,7 +10,6 @@
 
 1. 郵便番号から住所を補完する
 2. 住所を分割する
-
 
 <details><summary> Request Body </summary>
 
@@ -31,7 +31,7 @@
   ]
 }
 ```
-	
+
 </details>
 
 上記リクエストに対して、下記のようなレスポンスを期待します
@@ -40,39 +40,40 @@
 
 ```json
 {
-  "completed_count": 2,
-  "addresses": [
-    {
-      "prefecture": "東京都",
-      "city": "港区",
-      "town": "芝公園",
-      "house_number": "4-2-8",
-      "building_name": "",
-      "room_number": ""
-    },
-    {
-      "prefecture": "東京都",
-      "city": "千代田区",
-      "town": "千代田",
-      "house_number": "1-1",
-      "building_name": "",
-      "room_number": ""
-    },
-    {
-      "prefecture": "東京都",
-      "city": "永田町",
-      "town": "",
-      "house_number": "1-7-1",
-      "building_name": "国会議事堂",
-      "room_number": "123号室"
-    }
-  ]
+	"completed_count": 2,
+	"addresses": [
+		{
+			"prefecture": "東京都",
+			"city": "港区",
+			"town": "芝公園",
+			"house_number": "4-2-8",
+			"building_name": "",
+			"room_number": ""
+		},
+		{
+			"prefecture": "東京都",
+			"city": "千代田区",
+			"town": "千代田",
+			"house_number": "1-1",
+			"building_name": "",
+			"room_number": ""
+		},
+		{
+			"prefecture": "東京都",
+			"city": "永田町",
+			"town": "",
+			"house_number": "1-7-1",
+			"building_name": "国会議事堂",
+			"room_number": "123号室"
+		}
+	]
 }
 ```
 
 </details>
 
 ## EndPoints
+
 ### POST /convert/complete_and_divide_address - 郵便番号から住所を補完し、分割する
 
 簡単な仕様については上記の通り。
@@ -81,16 +82,18 @@
 ### GET /health - 正常にサーバーが動いているかの確認
 
 正常であるとき、
+
 ```
 {
   "status": "ok"
 }
 ```
+
 を返す
 
 ### /docs - FastAPI の Swagger UI
 
-上の[2つのエンドポイント](#endpoints)を実際に叩き、挙動を確認することができる。
+上の[2 つのエンドポイント](#endpoints)を実際に叩き、挙動を確認することができる。
 
 ## How to get address info from zipcode(検討中)
 
@@ -102,13 +105,14 @@
 
 <details><summary> 禁止事項 </summary>
 
-> ユーザは、本APIの利用に際して、以下の各号に定める事項を行ってはならないものとします。
-> 1. 形態の如何を問わず、本規約の定めに反する態様で本APIを利用すること
-> 2. 本APIにより提供される機能のみを提供することを目的とした対象サイトにおいて本APIを利用すること、およびこれと同視し得るような態様にて対象サイトにて本APIを利用すること
+> ユーザは、本 API の利用に際して、以下の各号に定める事項を行ってはならないものとします。
+>
+> 1. 形態の如何を問わず、本規約の定めに反する態様で本 API を利用すること
+> 2. 本 API により提供される機能のみを提供することを目的とした対象サイトにおいて本 API を利用すること、およびこれと同視し得るような態様にて対象サイトにて本 API を利用すること
 > 3. 法律、規則、条例等の制定法に反する行為、又はそれを勧誘・助長する行為
 > 4. 虚偽の情報をコンテンツに掲載し、コンテンツ閲覧者を欺く行為
 > 5. 当社または第三者の知的財産権その他の権利を侵害する内容
-> 6. 本APIの運営、又はネットワークやシステムを妨害する行為
+> 6. 本 API の運営、又はネットワークやシステムを妨害する行為
 > 7. 当社が、過度若しくは不適切と判断する商用目的の宣伝・広告行為
 > 8. 有害なコンピュータウィルス、コード、ファイル、プログラム等を開示する行為、若しくは開示されている場所について示唆する行為
 > 9. 犯罪行為に関わる内容、差別的表現その他公序良俗に反する内容
@@ -124,35 +128,34 @@ endpoint は次の通り https://zipcloud.ibsnet.co.jp/api/search
 （例）郵便番号「7830060」で検索する場合
 https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060
 
-
 <details><summary> Response は以下の通り </summary>
 
 ```json
 {
-  "message": null,
-  "results": [
-    {
-      "address1": "北海道",
-      "address2": "美唄市",
-      "address3": "上美唄町協和",
-      "kana1": "ﾎｯｶｲﾄﾞｳ",
-      "kana2": "ﾋﾞﾊﾞｲｼ",
-      "kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳｷｮｳﾜ",
-      "prefcode": "1",
-      "zipcode": "0790177"
-    },
-    {
-      "address1": "北海道",
-      "address2": "美唄市",
-      "address3": "上美唄町南",
-      "kana1": "ﾎｯｶｲﾄﾞｳ",
-      "kana2": "ﾋﾞﾊﾞｲｼ",
-      "kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳﾐﾅﾐ",
-      "prefcode": "1",
-      "zipcode": "0790177"
-    }
-  ],
-  "status": 200
+	"message": null,
+	"results": [
+		{
+			"address1": "北海道",
+			"address2": "美唄市",
+			"address3": "上美唄町協和",
+			"kana1": "ﾎｯｶｲﾄﾞｳ",
+			"kana2": "ﾋﾞﾊﾞｲｼ",
+			"kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳｷｮｳﾜ",
+			"prefcode": "1",
+			"zipcode": "0790177"
+		},
+		{
+			"address1": "北海道",
+			"address2": "美唄市",
+			"address3": "上美唄町南",
+			"kana1": "ﾎｯｶｲﾄﾞｳ",
+			"kana2": "ﾋﾞﾊﾞｲｼ",
+			"kana3": "ｶﾐﾋﾞﾊﾞｲﾁｮｳﾐﾅﾐ",
+			"prefcode": "1",
+			"zipcode": "0790177"
+		}
+	],
+	"status": 200
 }
 ```
 
@@ -186,16 +189,20 @@ CSV 形式で
 - 郵便番号と住所の対応に変化があれば、迅速に DB を更新する必要がある
 
 ## How to Complete and Divide Address
+
 後々追記予定
 
 ## How to Use
+
 Up the docker container
 if change requirements.txt or Dockerfile or docker-compose.yml
+
 ```bash
 docker-compose build
 ```
-  
+
 And
+
 ```bash
 docker-compose up
 ```
