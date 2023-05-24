@@ -93,7 +93,6 @@ class Address(BaseModel):
 
         # 郵便番号から求めた市区町村名と一致する場合
         if completed_city != "" and re.match(completed_city, address) is not None:
-            self.is_completed = True
             return completed_city, address.replace(completed_city, "", 1)
 
         # 区で市区町村を区切るのは、東京23区のみ
@@ -123,7 +122,6 @@ class Address(BaseModel):
 
         # 郵便番号から求めた町域名と一致する場合
         if completed_town != "" and re.match(completed_town, address) is not None:
-            self.is_completed = True
             return completed_town, address.replace(completed_town, "", 1)
 
         # 町域名が存在しない
