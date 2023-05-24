@@ -9,7 +9,7 @@ from data.ward_names_of_tokyo import WARD_NAMES_OF_TOKYO
 from src.functions.normalize import Normalize
 
 
-class Address(BaseModel):
+class AddressInfo(BaseModel):
     zipcode: str = Field(default="", example="100-0000")
     address: str = Field(default="", example="東京都港区芝公園1-1東京スカイツリー101")
 
@@ -91,6 +91,10 @@ class Address(BaseModel):
         address: str = self.rest_address
         completed_city: str = self.completed_city
 
+        # 郵便番号から求めた市区町村名と一致する場合
+        if completed_city != "" and re.match(completed_city, address) is not None:
+            return completed_city, address.replace(completed_city, "", 1)
+
         # 区で市区町村を区切るのは、東京23区のみ
         for ward_name in WARD_NAMES_OF_TOKYO:
             if re.match(ward_name, address) is not None:
@@ -114,11 +118,10 @@ class Address(BaseModel):
 
     def extract_town(self) -> tuple[str, str]:
         address: str = self.rest_address
-        completed_town: str = self.completed_city
+        completed_town: str = self.completed_town
 
         # 郵便番号から求めた町域名と一致する場合
         if completed_town != "" and re.match(completed_town, address) is not None:
-            self.is_completed = True
             return completed_town, address.replace(completed_town, "", 1)
 
         # 町域名が存在しない
@@ -129,25 +132,42 @@ class Address(BaseModel):
         if re.search("[0-9]+", address) is not None:
             town_and_rest_address: list[str] = re.split("[0-9]+", address, 1)
             town: str = town_and_rest_address[0]
-            return Normalize.reverse_house_number_expression(town), address.replace(town, "", 1)
+            if town != "":
+                return Normalize.reverse_house_number_expression(town), address.replace(town, "", 1)
 
-        else:
-            return address, ""
+            # 町域名が省略されている場合
+            # TODO: この場合はほとんどあり得ない可能性が高く、バグの発生源になる恐れがある
+            if completed_town != "":
+                self.is_completed = True
+            return completed_town, address
+
+        return address, ""
 
     def extract_house_number(self) -> tuple[str, str]:
         address: str = self.rest_address
         match = re.match("[0-9〇一二三四五六七八九/tyoume/banti/ban/gou/no-]+", address)
+        if match is None:
+            return "", address
+
+        house_number: str = match.group()
+        rest_address: str = address.replace(house_number, "", 1)
+        house_number = Normalize.convert_house_number_expression_to_hyphen(house_number)
+        house_number = Normalize.convert_Chinese_numeral_to_half_width_digit(house_number)
+
+        # 1-2-3-302のように、部屋番号が連結している可能性がある
+        match = re.match("(?:[0-9]+-*){0,3}", house_number)
         if match is not None:
+            rest_address = house_number.replace(match.group(), "", 1) + rest_address
             house_number: str = match.group()
-            house_number = Normalize.convert_house_number_expression_to_hyphen(house_number)
-            house_number = Normalize.convert_Chinese_numeral_to_half_width_digit(house_number)
 
-            # 1-2-3-のようになっている場合がある
-            if house_number[len(house_number) - 1] == "-":
-                house_number = house_number[:-1]
-            return house_number, address.replace(match.group(), "", 1)
+        # 1-2-3-のようになっている場合がある
+        if house_number != "" and house_number[len(house_number) - 1] == "-":
+            house_number = house_number[:-1]
 
-        return "", address
+        if rest_address != "" and rest_address[len(rest_address) - 1] == "-":
+            rest_address = rest_address[:-1]
+
+        return house_number, rest_address
 
     def extract_building_name(self) -> tuple[str, str]:
         address: str = self.rest_address
