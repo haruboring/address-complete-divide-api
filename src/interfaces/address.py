@@ -132,10 +132,16 @@ class Address(BaseModel):
         if re.search("[0-9]+", address) is not None:
             town_and_rest_address: list[str] = re.split("[0-9]+", address, 1)
             town: str = town_and_rest_address[0]
-            return Normalize.reverse_house_number_expression(town), address.replace(town, "", 1)
+            if town != "":
+                return Normalize.reverse_house_number_expression(town), address.replace(town, "", 1)
 
-        else:
-            return address, ""
+            # 町域名が省略されている場合
+            # TODO: この場合はほとんどあり得ない可能性が高く、バグの発生源になる恐れがある
+            if completed_town != "":
+                self.is_completed = True
+            return completed_town, address
+
+        return address, ""
 
     def extract_house_number(self) -> tuple[str, str]:
         address: str = self.rest_address
