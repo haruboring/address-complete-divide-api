@@ -1,0 +1,38 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをクローンする
+        uses: actions/checkout@v2
+
+      - name: Python3.9をセットアップ
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: AWS credentialsを設定する
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: AWS SAMをインストールする
+        run: |
+          sudo pip install aws-sam-cli
+
+      - name: Lambda関数をビルドする
+        run: |
+          sam build
+
+      - name: Lambda関数をデプロイする
+        run: |
+          sam deploy
