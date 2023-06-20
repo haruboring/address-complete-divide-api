@@ -32,6 +32,8 @@ class AddressInfo(BaseModel):
         return f"都道府県:{self.prefecture}, 市区町村:{self.city}, 町域:{self.town}, 番地:{self.house_number}, 建物名:{self.building_name}, 部屋番号:{self.room_number}"
 
     def complete_address(self):
+        if self.zipcode == "":
+            return
         url = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={self.zipcode}"
         response = requests.get(url)
 
