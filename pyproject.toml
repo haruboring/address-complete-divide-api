@@ -1,21 +1,21 @@
 [tool.poetry]
-name = "address-complete-divide"
+name = "address-complete-divide-api"
 version = "0.1.0"
 description = ""
-authors = ["haruboring"]
+authors = ["haruboting <raiu_hk@icloud.com>"]
 readme = "README.md"
-packages = [{include = "address_complete_divide"}]
+packages = [{include = "address_complete_divide_api"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 uvicorn = "^0.22.0"
 mangum = "^0.17.0"
-fastapi = "^0.95.1"
-pytest = "^7.3.1"
+pytest = "^7.3.2"
 black = "^23.3.0"
 flake8 = "^6.0.0"
-requests = "^2.30.0"
+requests = "^2.31.0"
 pytest-cov = "^4.1.0"
+fastapi = "^0.97.0"
 
 
 [build-system]
