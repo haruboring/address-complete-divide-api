@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 5
+    Tracing: Active
+  Api:
+    TracingEnabled: True
+
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: src.main.lambda_handler
+      Runtime: python3.9
+      Timeout: 900
+      MemorySize: 3008
+      EphemeralStorage:
+        Size: 8192
+      FunctionUrlConfig:
+        AuthType: NONE
+        Cors:
+          AllowOrigins: # AllowOriginsは複数形！（REST APIでは単数形AllowOrigin）
+            - "http://localhost:3000"
+            - "https://*"
+          AllowCredentials: true
+          AllowMethods:
+            - GET
+            - HEAD
+            - POST
+            - PUT
+            - DELETE
+            - PATCH
+          AllowHeaders:
+            - "*"
+          MaxAge: 43200
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+  Api:
+    Type: AWS::Serverless::HttpApi
+
+Outputs:
+  FunctionUrlEndpoint:
+    Description: "SmartSenkyoExtensionsFunction URL Endpoint"
+    Value:
+      Fn::GetAtt: FunctionUrl.FunctionUrl
