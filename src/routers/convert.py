@@ -15,4 +15,4 @@ async def health(request: list[AddressInfo]):  # type: ignore
         completed_count = address_info.get_completed_address_count(completed_count)
         address_info.delete_extra_attributes()
 
-    return {"completed_count": completed_count, "addresses": request}
+    return {"completed_count": completed_count, "divided_count": len(request), "formatted_addresses": request}
