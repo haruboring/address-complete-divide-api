@@ -9,11 +9,6 @@ from data.ward_names_of_tokyo import WARD_NAMES_OF_TOKYO
 from src.functions.format_zipcode import format_zipcode
 from src.functions.normalize import Normalize
 
-dynamodb = boto3.resource("dynamodb")
-
-table_name: str = "address_info_table"
-table = dynamodb.Table(table_name)  # type: ignore
-
 
 class AddressInfo(BaseModel):
     zipcode: str = Field(default="", example="100-0000")
@@ -34,6 +29,11 @@ class AddressInfo(BaseModel):
     building_name: str = ""
     room_number: str = ""
 
+    dynamodb = boto3.resource("dynamodb")
+
+    table_name: str = "address_info_table"
+    table = dynamodb.Table(table_name)  # type: ignore
+
     def __str__(self) -> str:
         return f"都道府県:{self.prefecture}, 市区町村:{self.city}, 町域:{self.town}, 番地:{self.house_number}, 建物名:{self.building_name}, 部屋番号:{self.room_number}"
 
@@ -43,7 +43,7 @@ class AddressInfo(BaseModel):
             return
 
         partition_key = {"zipcode": formatted_zipcode}
-        response = table.get_item(Key=partition_key)
+        response = self.table.get_item(Key=partition_key)
 
         if response.get("Item") is not None:
             item = response["Item"]
