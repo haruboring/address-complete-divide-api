@@ -106,7 +106,7 @@ DynamoDB上に、郵便番号から一意に、都道府県・市区町村・町
 
 
 郵便番号と住所のデータは[郵便番号データ](http://zipcloud.ibsnet.co.jp/) を利用している。
-([DB更新のためのリポジトリ](https://github.com/haruboring/get_address_info))
+([DB更新のためのリポジトリ](https://github.com/haruboring/get_and_put_address_info))
 
 
 <details><summary> （参考）外部APIを叩いて住所を補完する方法 </summary>
