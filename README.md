@@ -97,25 +97,19 @@
 
 ## How to get address info from zipcode
 
-### 方法 2. 郵便番号データの DB を作成して住所を補完する
+DynamoDB上に、郵便番号から一意に、都道府県・市区町村・町域の情報が決まる住所情報について保存し、郵便番号情報から、それ以外の情報を取得している。
 
-[郵便番号データ](http://zipcloud.ibsnet.co.jp/) を利用する
+現在（2023/07/05 23:30）は、117,712個の住所データが保存されている。
 
-CSV 形式で
-郵便番号, 都道府県, 市区町村, 町域, 都道府県カナ, 市区町村カナ, 町域カナ
-という形式でデータが提供されているので、これを DB に登録して利用する。
-
-#### Merit
-
-- DB を作成することで API を叩くよりは高速に処理ができそう
-
-#### Demerit
-
-- DB を作成する必要があるので実装が少し面倒
-- 郵便番号と住所の対応に変化があれば、迅速に DB を更新する必要がある
+(例:)
+<img width="1291" alt="スクリーンショット 2023-07-05 23 37 18" src="https://github.com/haruboring/address-complete-divide-api/assets/82028915/eb7b937d-6d8c-4cff-8252-e80785aec00c">
 
 
-<details><summary> [不採用]外部APIを叩いて住所を補完する方法 </summary>
+郵便番号と住所のデータは[郵便番号データ](http://zipcloud.ibsnet.co.jp/) を利用している。
+([DB更新のためのリポジトリ](https://github.com/haruboring/get_address_info))
+
+
+<details><summary> （参考）外部APIを叩いて住所を補完する方法 </summary>
 
 [郵便番号検索 API](http://zipcloud.ibsnet.co.jp/doc/api) を利用する
 
