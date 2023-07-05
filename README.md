@@ -95,9 +95,21 @@
 
 上の[2 つのエンドポイント](#endpoints)を実際に叩き、挙動を確認することができる。
 
-## How to get address info from zipcode(検討中)
+## How to get address info from zipcode
 
-### 方法 1. 郵便番号検索 API を叩いて住所を補完する
+DynamoDB上に、郵便番号から一意に、都道府県・市区町村・町域の情報が決まる住所情報について保存し、郵便番号情報から、それ以外の情報を取得している。
+
+現在（2023/07/05 23:30）は、117,712個の住所データが保存されている。
+
+(例:)
+<img width="1291" alt="スクリーンショット 2023-07-05 23 37 18" src="https://github.com/haruboring/address-complete-divide-api/assets/82028915/eb7b937d-6d8c-4cff-8252-e80785aec00c">
+
+
+郵便番号と住所のデータは[郵便番号データ](http://zipcloud.ibsnet.co.jp/) を利用している。
+([DB更新のためのリポジトリ](https://github.com/haruboring/get_address_info))
+
+
+<details><summary> （参考）外部APIを叩いて住所を補完する方法 </summary>
 
 [郵便番号検索 API](http://zipcloud.ibsnet.co.jp/doc/api) を利用する
 
@@ -169,24 +181,10 @@ https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060
 #### Demerit
 
 - フロント -> API -> 郵便番号検索 API は少し冗長な気がする
-  - ボトルネックになって方法 2 よりも実行時間がかかりそう
+  - ボトルネックになって方法 2 よりも実行時間がかかる
+    - 1000個の住所について補完を行う際に、自前のDBを使うと30秒で終わる処理が、この方法だと5分以上かかる
 
-### 方法 2. 郵便番号データの DB を作成して住所を補完する
-
-[郵便番号データ](http://zipcloud.ibsnet.co.jp/) を利用する
-
-CSV 形式で
-郵便番号, 都道府県, 市区町村, 町域, 都道府県カナ, 市区町村カナ, 町域カナ
-という形式でデータが提供されているので、これを DB に登録して利用する。
-
-#### Merit
-
-- DB を作成することで API を叩くよりは高速に処理ができそう
-
-#### Demerit
-
-- DB を作成する必要があるので実装が少し面倒
-- 郵便番号と住所の対応に変化があれば、迅速に DB を更新する必要がある
+</details>
 
 ## How to Complete and Divide Address
 

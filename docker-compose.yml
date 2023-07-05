@@ -8,6 +8,7 @@ services:
       - ./src:/app/src
       - ./tests:/app/tests
       - ./data:/app/data
+      - ~/.aws/:/root/.aws:ro
     ports:
       - 8000:8000
     tty: true
