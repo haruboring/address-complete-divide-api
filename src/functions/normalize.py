@@ -67,7 +67,7 @@ class Normalize:
         formatted_address: str = address
 
         # 1ー4－3のような形は一つ目が番地と考えられるのでsearchでいい
-        characters_similar_to_hyphen = ["－", "ー", "−"]
+        characters_similar_to_hyphen = ["－", "ー", "−", "‐"]
         for character_similar_to_hyphen in characters_similar_to_hyphen:
             match = re.search("([0-9]+" + character_similar_to_hyphen + ")+[0-9]+", address)
             if match is not None:
