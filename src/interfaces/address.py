@@ -1,5 +1,6 @@
 import re
 
+import boto3
 import requests
 from pydantic import BaseModel, Field
 
@@ -34,14 +35,31 @@ class AddressInfo(BaseModel):
     def complete_address(self):
         if self.zipcode == "":
             return
-        url = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={self.zipcode}"
-        response = requests.get(url)
 
-        if response.status_code == 200 and response.json()["results"] is not None and len(response.json()["results"]) == 1:
-            result = response.json()["results"][0]
-            self.completed_prefecture = result.get("address1", "")
-            self.completed_city = result.get("address2", "")
-            self.completed_town = result.get("address3", "")
+        dynamodb = boto3.resource("dynamodb")
+
+        table_name: str = "address_info_table"
+        table = dynamodb.Table(table_name)  # type: ignore
+
+        partition_key = {"zipcode": self.zipcode}
+        response = table.get_item(Key=partition_key)
+
+        if response.get("Item") is not None:
+            item = response["Item"]
+            self.completed_prefecture = item.get("prefecture", "")
+            self.completed_city = item.get("city", "")
+            self.completed_town = item.get("town", "")
+            self.is_completed = True
+            return
+
+        # url = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={self.zipcode}"
+        # response = requests.get(url)
+
+        # if response.status_code == 200 and response.json()["results"] is not None and len(response.json()["results"]) == 1:
+        #     result = response.json()["results"][0]
+        #     self.completed_prefecture = result.get("address1", "")
+        #     self.completed_city = result.get("address2", "")
+        #     self.completed_town = result.get("address3", "")
 
     def normalize_address(self):
         normalizing_address: str = self.address
